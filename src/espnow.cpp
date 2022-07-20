@@ -14,8 +14,7 @@ void ESPNOW::SetupESPNOW()
   #endif
   WiFi.mode(WIFI_STA);
   esp_wifi_set_ps(WIFI_PS_NONE);
-
-  WiFi.scanNetworks();
+  esp_wifi_start();
   esp_wifi_set_channel(11, WIFI_SECOND_CHAN_NONE);
 
   if (esp_now_init() != ESP_OK) {

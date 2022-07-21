@@ -8,7 +8,7 @@ void heartbeatTask(TimerHandle_t handle){
   #ifdef DEBUG
     Serial.println("Executing Heartbeat");
   #endif
-  ESPNOW::sendDataToRoot("TESTING");
+  ESPNOW::sendDataToRoot("heartbeat");
 }
 
 void setup() {
@@ -19,7 +19,7 @@ void setup() {
 
   esp_task_wdt_init(2, true);
   esp_task_wdt_add(NULL);
-  xTimerStart(xTimerCreate("heartbeatTimer", pdMS_TO_TICKS(10000), pdTRUE, (void*)0, heartbeatTask), portMAX_DELAY);
+  xTimerStart(xTimerCreate("heartbeatTimer", pdMS_TO_TICKS(5 * 60 * 1000), pdTRUE, (void*)0, heartbeatTask), portMAX_DELAY);
   taskWaitTime = xTaskGetTickCount();
   heartbeatTask(NULL);
 }
